@@ -1,23 +1,11 @@
 class Producto:
     def __init__ (self, nombre, precio, cantidad):
-        pass
+        self.nombre=nombre
+        self.precio=precio
+        self.cantidad=cantidad
 
     def __str__(self):
         return f"Producto: {self.nombre}, Precio: {self.precio}, Cantidad: {self.cantidad}"
-
-    def agregar (self,nombre,precio,cantidades):
-        if self.nombre != "":
-            self.nombre=str(nombre)
-        else:
-            raise ValueError("Nombre vacios.")
-        if self.precio > 0:
-            self.precio=float(precio)
-        else:
-            raise ValueError("Precio negativo o cero")
-        if self.cantidad > 0:
-            self.cantidad=int(cantidad)
-        else:
-            raise ValueError("Cantidad negativa o cero")
 
     def actualizar_precio(self,nuevo_precio):
         if nuevo_precio > 0:
@@ -30,12 +18,12 @@ class Producto:
     def calcular_valor_total(self):
         return self.precio * self.canitad
 
-class Inventario (Producto)
+class Inventario (Producto):
     def __init__ (self):
         inventario = []
 
     def agregar_producto(self,producto):
-        self.inventario.append([self.producto.nombre,self.producto.precio,self.producto.cantidad)
+        self.inventario.append([self.producto.nombre,self.producto.precio,self.producto.cantidad])
         
 
     def buscar_producto(self,nombre):
@@ -48,9 +36,9 @@ class Inventario (Producto)
 
     def calcular_valor_inventario(self):
         for sublista in self.inventario:
-            suma+=sublista[1]*sublista[2]
+            suma+=self.calcular_valor_total(sublista)
 
-    def listar_prodcutos(self)
+    def listar_prodcutos(self):
         return self.inventario
             
 def solicitar_parametro(nombre_parametro, tipo_dato):
@@ -83,32 +71,33 @@ def menu_principal():
         # Utilizar if/elif/else para ejecutar la acción según la elección
         if eleccion == "1":
             print("Has elegido la opción agregar prodcuto.")
-            nombre=solicitar_parametro(nombre, int)
-            precio=solicitar_parametro(precio, int)
-            cantidad=solicitar_parametro(cantidad, int)
-            inventario.agregar_prodcuto(nombre,precio,cantidad)
+            nombre=solicitar_parametro("nombre", str)
+            precio=solicitar_parametro("precio", int)
+            cantidad=solicitar_parametro("cantidad", int)
+            producto=Producto(nombre,precio,cantidad)
+            inventario.agregar_producto(producto)
         elif eleccion == "2":
             print("Has elegido la opción buscar prodcuto.")
-            nombre=solicitar_parametro(nombre, int)
+            nombre=solicitar_parametro("nombre", int)
             if inventario.buscar_producto(nombre):
-                print ("Producto en inventario"
-             else:
-                 print ("Producto no existente")          
+                print ("Producto en inventario")
+            else:
+                print ("Producto no existente")          
         elif eleccion == "3":
             print("Has elegido la opción actualizar precio")
-            nombre=solicitar_parametro(nombre, int)
-            precio=solicitar_parametro(precio, int)
+            nombre=solicitar_parametro("nombre", int)
+            precio=solicitar_parametro("precio", int)
             inventario.actualizar_precio(nombre,precio)
         elif eleccion == "4":
             print("Has elegido la opción actualizar cantidzd")
-            nombre=solicitar_parametro(nombre, int)
-            precio=solicitar_parametro(cantidad, int)
+            nombre=solicitar_parametro("nombre", int)
+            precio=solicitar_parametro("cantidad", int)
             inventario.actualizar_cantidad(nombre,cantidad)
         elif eleccion == "5":
             salir=True
             print("Programa finalizado")
         else:
-            print("Opción no válida. Por favor, elige entre 1, 2, 4 o 5.")
+            print("Opción no válida. Por favor, elige entre 1, 2, 3, 4 o 5.")
 
 if __name__ == "__main__":
     inventario=Inventario()
