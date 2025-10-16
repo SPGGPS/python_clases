@@ -1,4 +1,3 @@
-
 class Producto:
     def __init__ (self, nombre, precio, cantidad):
         pass
@@ -54,6 +53,18 @@ class Inventario (Producto)
     def listar_prodcutos(self)
         return self.inventario
             
+def solicitar_parametro(nombre_parametro, tipo_dato):
+    """
+    Solicita al usuario un valor para un parámetro específico,
+    validando el tipo de dato.
+    """
+    while True:
+        try:
+            entrada = input(f"Por favor, ingrese {nombre_parametro} ({tipo_dato.__name__}): ")
+            valor_convertido = tipo_dato(entrada)
+            return valor_convertido
+        except ValueError:
+            print(f"Error: La entrada no es un {tipo_dato.__name__}. Intente de nuevo.")
 
 def menu_principal():
     salir=False
@@ -62,7 +73,7 @@ def menu_principal():
             Por favor, elige una opción:
             1. Agregar producto
             2. Buscar producto
-            3. Actualizar producto
+            3. Actualizar precio
             4. Actualizar cantidad
             5. Salir
             """)
@@ -71,16 +82,31 @@ def menu_principal():
 
         # Utilizar if/elif/else para ejecutar la acción según la elección
         if eleccion == "1":
-            print("Has elegido la Opción A.")
-            
+            print("Has elegido la opción agregar prodcuto.")
+            nombre=solicitar_parametro(nombre, int)
+            precio=solicitar_parametro(precio, int)
+            cantidad=solicitar_parametro(cantidad, int)
+            inventario.agregar_prodcuto(nombre,precio,cantidad)
         elif eleccion == "2":
-            print("Has elegido la Opción B.")
+            print("Has elegido la opción buscar prodcuto.")
+            nombre=solicitar_parametro(nombre, int)
+            if inventario.buscar_producto(nombre):
+                print ("Producto en inventario"
+             else:
+                 print ("Producto no existente")          
         elif eleccion == "3":
-            print("Has elegido la Opción C.")
-        elif eleccion == "3":
-            print("Has elegido la Opción C.")
+            print("Has elegido la opción actualizar precio")
+            nombre=solicitar_parametro(nombre, int)
+            precio=solicitar_parametro(precio, int)
+            inventario.actualizar_precio(nombre,precio)
+        elif eleccion == "4":
+            print("Has elegido la opción actualizar cantidzd")
+            nombre=solicitar_parametro(nombre, int)
+            precio=solicitar_parametro(cantidad, int)
+            inventario.actualizar_cantidad(nombre,cantidad)
         elif eleccion == "5":
             salir=True
+            print("Programa finalizado")
         else:
             print("Opción no válida. Por favor, elige entre 1, 2, 4 o 5.")
 
