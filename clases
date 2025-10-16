@@ -1,9 +1,0 @@
-class Producto:
-    nombre=""
-    precio=""
-    cantidades=""
-
-    def __init__ (self)
-        self.productos=[]
-
-    def agregar (self,nombre,precio,cantidades):
