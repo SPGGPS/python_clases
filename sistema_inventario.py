@@ -1,4 +1,8 @@
 class Producto:
+    nombre=""
+    precio=0
+    cantidad=0
+    
     def __init__ (self, nombre, precio, cantidad):
         self.nombre=nombre
         self.precio=precio
@@ -20,16 +24,15 @@ class Producto:
 
 class Inventario (Producto):
     def __init__ (self):
-        super().__init__(nombre, precio, cantidad)
         self.inventario = []
 
     def agregar_producto(self,producto):
-        self.inventario.append([super.nombre,super.precio,super.cantidad])
+        self.inventario.append([producto])
         
 
     def buscar_producto(self,nombre):
         for sublista in self.inventario:
-            if nombre in sublista:
+            if nombre == sublista.nombre:
                 encontrado = True
                 return "Se ha encontrado el elemento"
             else:
@@ -75,22 +78,23 @@ def menu_principal():
             nombre=solicitar_parametro("nombre", str)
             precio=solicitar_parametro("precio", int)
             cantidad=solicitar_parametro("cantidad", int)
-            inventario.agregar_producto(nombre,precio,cantidadproducto)
+            producto=Producto(nombre,precio,cantidad)
+            inventario.agregar_producto(producto)
         elif eleccion == "2":
             print("Has elegido la opción buscar prodcuto.")
-            nombre=solicitar_parametro("nombre", int)
+            nombre=solicitar_parametro("nombre", str)
             if inventario.buscar_producto(nombre):
                 print ("Producto en inventario")
             else:
                 print ("Producto no existente")          
         elif eleccion == "3":
             print("Has elegido la opción actualizar precio")
-            nombre=solicitar_parametro("nombre", int)
+            nombre=solicitar_parametro("nombre", str)
             precio=solicitar_parametro("precio", int)
             inventario.actualizar_precio(nombre,precio)
         elif eleccion == "4":
-            print("Has elegido la opción actualizar cantidzd")
-            nombre=solicitar_parametro("nombre", int)
+            print("Has elegido la opción actualizar cantidad")
+            nombre=solicitar_parametro("nombre", str)
             precio=solicitar_parametro("cantidad", int)
             inventario.actualizar_cantidad(nombre,cantidad)
         elif eleccion == "5":
