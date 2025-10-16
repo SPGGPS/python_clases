@@ -20,10 +20,11 @@ class Producto:
 
 class Inventario (Producto):
     def __init__ (self):
-        inventario = []
+        super().__init__(nombre, precio, cantidad)
+        self.inventario = []
 
     def agregar_producto(self,producto):
-        self.inventario.append([self.producto.nombre,self.producto.precio,self.producto.cantidad])
+        self.inventario.append([super.nombre,super.precio,super.cantidad])
         
 
     def buscar_producto(self,nombre):
@@ -36,7 +37,7 @@ class Inventario (Producto):
 
     def calcular_valor_inventario(self):
         for sublista in self.inventario:
-            suma+=self.calcular_valor_total(sublista)
+            suma+=super.calcular_valor_total(sublista)
 
     def listar_prodcutos(self):
         return self.inventario
@@ -74,8 +75,7 @@ def menu_principal():
             nombre=solicitar_parametro("nombre", str)
             precio=solicitar_parametro("precio", int)
             cantidad=solicitar_parametro("cantidad", int)
-            producto=Producto(nombre,precio,cantidad)
-            inventario.agregar_producto(producto)
+            inventario.agregar_producto(nombre,precio,cantidadproducto)
         elif eleccion == "2":
             print("Has elegido la opción buscar prodcuto.")
             nombre=solicitar_parametro("nombre", int)
